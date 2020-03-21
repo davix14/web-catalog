@@ -1,0 +1,14 @@
+{
+  "name": "web-practice",
+  "version": "1.0.0",
+  "dependencies": {
+    "mongodb": "3.5"
+  },
+  "description": "practicing a backend for website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Divrex",
+  "license": "ISC"
+}
