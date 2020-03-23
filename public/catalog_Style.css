@@ -6,5 +6,11 @@
 */
 html{
 	width: 100%;
-	background-color: #31b9eb;
+	background-color: #38527a;
+}
+
+#content{
+	background-color: white;
+	width: 65%;
+	align-self: center;
 }
