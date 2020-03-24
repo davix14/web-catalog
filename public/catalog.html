@@ -3,12 +3,15 @@
 
 	-->
 <HTML>
-	<head>
-		<link href="catalog_Style.css" type="text/css" rel="stylesheet">
-		<title>Movie Catalog</title>
-	</head>
-	<div id="content">
+
+<head>
+	<link href="catalog_Style.css" type="text/css" rel="stylesheet">
+	<title>Movie Catalog</title>
+</head>
+<div id="title_Bar">
 	<h1 id="header">Movie Catalog</h1>
+</div>
+<div id="content">
 	<div id="existing_Entries">
 		<h2 id="Exisiting_List_Title">Previously Watched Movies</h2>
 		<ul id="exisitng_list">
@@ -21,11 +24,12 @@
 		<form target="_self" id="new_Entry_Form" method="post">
 			<label for="movie_Title">Movie Title:</label><br>
 			<input type="text" name="movie_Title"><br>
-			<label for="Rating">Rating:</label><br>	
-			<input type="text" name="Rating" ><br><br>
+			<label for="Rating">Rating:</label><br>
+			<input type="text" name="Rating"><br><br>
 			<input type="submit" name="submit">
 		</form>
 	</div>
-	</div> 
-	<script src="app_Main.js"></script>
+</div>
+<script src="app_Main.js"></script>
+
 </HTML>

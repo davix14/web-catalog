@@ -9,7 +9,14 @@ html{
 	background-color: #38527a;
 }
 
+#title_Bar{
+	width: 100%;
+	background-color: #5895f0;
+	text-align: center;
+}
+
 #content{
+	margin: 0% 15% 0% 15%;
 	background-color: white;
 	width: 65%;
 	align-self: center;
