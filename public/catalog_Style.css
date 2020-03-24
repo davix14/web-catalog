@@ -6,19 +6,25 @@
 */
 html{
 	width: 100%;
-	background-color: #38527a;
+	background-color: #5895f0;
+}
+
+body{
+	margin: 0%;
 }
 
 #title_Bar{
 	width: 100%;
 	background-color: #5895f0;
 	text-align: center;
+	margin: 0px;
 }
 
 #content{
 	margin: 0% 15% 0% 15%;
+	padding: 5%;
 	background-color: white;
-	width: 65%;
+	width: 50%;
 	align-self: center;
 }
 
