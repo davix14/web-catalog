@@ -1,4 +1,4 @@
-//Take list of hotels and add to a visible list
+//Take input from form and add to "Existing List"
 function addListItem(){
 	var list;
 	list = document.getElementById('movie1-rating');
