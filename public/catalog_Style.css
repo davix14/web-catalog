@@ -5,6 +5,7 @@
  Class = .
 */
 html{
+	font: normal 20px/1.5 sans-serif;
 	width: 100%;
 	background-color: #5895f0;
 }
@@ -13,14 +14,17 @@ body{
 	margin: 0%;
 }
 
-#title_Bar{
+#title-bar{
 	width: 100%;
 	background-color: #5895f0;
-	text-align: center;
 	margin: 0px;
 }
 
-#content{
+#page-title{
+	text-align: center;
+}
+
+#page-content{
 	margin: 0% 15% 0% 15%;
 	padding: 5%;
 	background-color: white;
@@ -32,6 +36,6 @@ body{
 	color: blue;
 }
 
-.bad{
+.rating{
 	color: red;
 }
