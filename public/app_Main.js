@@ -1,4 +1,4 @@
-//Take input from form and add to "Existing List"
+//Take input from form and add to 'Existing List'
 function changeColor() {
 	var list;
 	list = document.getElementById('movie1-rating');
@@ -19,7 +19,7 @@ function formatRating() {
 	var rating = document.getElementsByClassName('rating');
 	for (var i = 0; i < rating.length; i++) {
 		var value = parseFloat(rating[i].innerHTML);
-		rating[i].innerHTML = value + "/5";
+		rating[i].innerHTML = value + '/5';
 		//debug only -> console.log(rating[i]);
 	}
 }
@@ -37,25 +37,25 @@ submitBtn.addEventListener('click', function(e){
 	console.log(newRating.value);
 
 	//create new elements with id's
-	var newDiv = document.createElement("div");
-	newDiv.setAttribute("id", "existing-movie2");
+	var newDiv = document.createElement('div');
+	newDiv.setAttribute('id', 'existing-movie2');
 
-	var newUl = document.createElement("ul");
-	newUl.setAttribute("id", "movie2-list");
+	var newUl = document.createElement('ul');
+	newUl.setAttribute('id', 'movie2-list');
 
-	var newLiTitle = document.createElement("li");
-	newLiTitle.setAttribute("id", "movie2-title");
+	var newLiTitle = document.createElement('li');
+	newLiTitle.setAttribute('id', 'movie2-title');
 	var newTitleText = document.createTextNode(newTitle.value);
 	newLiTitle.appendChild(newTitleText);
 
-	var newLiRating = document.createElement("li");
-	newLiRating.setAttribute("id", "movie2-rating");
-	newLiRating.setAttribute("class", "rating");
+	var newLiRating = document.createElement('li');
+	newLiRating.setAttribute('id', 'movie2-rating');
+	newLiRating.setAttribute('class', 'rating');
 	var newRatingText = document.createTextNode(newRating.value);
 	newLiRating.appendChild(newRatingText);
 
-	var newH3 = document.createElement("h3");
-	newH3.setAttribute("id", "movie2-label");
+	var newH3 = document.createElement('h3');
+	newH3.setAttribute('id', 'movie2-label');
 	var newH3Text = document.createTextNode('Movie 2');
 	newH3.appendChild(newH3Text);
 
