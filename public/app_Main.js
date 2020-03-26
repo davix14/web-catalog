@@ -15,7 +15,7 @@ window.addEventListener('load', formatRating, false);
 
 function formatRating() {
 	//log events
-	console.log('Page loaded! formatRating running');
+	//console.log('Page loaded! formatRating running');
 	var rating = document.getElementsByClassName('rating');
 	for (var i = 0; i < rating.length; i++) {
 		var value = parseFloat(rating[i].innerHTML);
@@ -24,17 +24,17 @@ function formatRating() {
 	}
 }
 
-//Add new list if the user clicks submit
+//Add new list if the user clicks submit button
 var submitBtn = document.getElementById('new-movie-submit');
 
-submitBtn.addEventListener('click', function(e){
+submitBtn.addEventListener('click', function (e) {
 	e.preventDefault(); //prevent default action (aka submitting form)
 	//get values of form
 	var newTitle = document.getElementById('new-movie-title');
 	var newRating = document.getElementById('new-movie-rating');
 
-	console.log(newTitle.value);
-	console.log(newRating.value);
+	// console.log(newTitle.value);
+	// console.log(newRating.value);
 
 	//create new elements with id's and text content
 	var newTd = document.createElement('td');
@@ -70,17 +70,31 @@ submitBtn.addEventListener('click', function(e){
 	newDiv.appendChild(newH3);
 	newDiv.appendChild(newUl);
 	newTd.appendChild(newDiv);
-	
-	console.log(newTd);
+
+	//console.log(newTd);
 
 	//Add new div after existing-movie1
 	var existingMovies = document.getElementById('em-row1');
 	existingMovies.insertBefore(newTd, existingMovies.lastChild);
-	
+
 	//Reset form back to blank
 	document.getElementById('new-movie-form').reset();
 
 	//format rating
 	formatRating();
 
+	var movies = document.getElementsByClassName('existing-movie-container');
+	console.log('No of Movies: ' + movies.length);
+
 }, false);
+
+//Add eventListener to submit button
+//Prevent default
+//Get form values
+//Create elements with id's
+//Nest elements
+//Insert into document
+//Clear form
+//Format rating
+//ALLOW MAX OF 4 td's per row
+

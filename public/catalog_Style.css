@@ -37,7 +37,7 @@ body{
 }
 
 .existing-movie-container{
-	margin: 1em;
+	margin: 0;
 	padding: .5em 1em .5em 1em;
 	border: 1.5px solid grey;
 	border-radius: 10px;
