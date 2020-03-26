@@ -36,9 +36,13 @@ submitBtn.addEventListener('click', function(e){
 	console.log(newTitle.value);
 	console.log(newRating.value);
 
-	//create new elements with id's
+	//create new elements with id's and text content
+	var newTd = document.createElement('td');
+	newTd.setAttribute('id', 'movie2-td');
+
 	var newDiv = document.createElement('div');
 	newDiv.setAttribute('id', 'existing-movie2');
+	newDiv.setAttribute('class', 'existing-movie-container');
 
 	var newUl = document.createElement('ul');
 	newUl.setAttribute('id', 'movie2-list');
@@ -65,12 +69,13 @@ submitBtn.addEventListener('click', function(e){
 	//Append h3 and ul --> newDiv
 	newDiv.appendChild(newH3);
 	newDiv.appendChild(newUl);
+	newTd.appendChild(newDiv);
 	
-	console.log(newDiv);
+	console.log(newTd);
 
 	//Add new div after existing-movie1
-	var existingMovies = document.getElementById('existing-entries');
-	existingMovies.insertBefore(newDiv, existingMovies.lastChild);
+	var existingMovies = document.getElementById('em-row1');
+	existingMovies.insertBefore(newTd, existingMovies.lastChild);
 	
 	//Reset form back to blank
 	document.getElementById('new-movie-form').reset();
