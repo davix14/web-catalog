@@ -110,10 +110,10 @@ $('#new-movie-submit').on('click', function(e){
 	var rowCount = $('.table-row').length;
 
 	//For debugging
-	console.log(newTitle);
-	console.log(newRating);
-	console.log(existingMovieCount);
-	console.log(rowCount);
+	// console.log(newTitle);
+	// console.log(newRating);
+	// console.log(existingMovieCount);
+	// console.log(rowCount);
 
 	//Reset all form elements
 	$('#new-movie-form')[0].reset();
@@ -121,7 +121,7 @@ $('#new-movie-submit').on('click', function(e){
 	//Create new elements with id's/classes
 	var newMovieTd = $('<td>').attr('id', 'movie'+newCount+'-td');
 	var newDiv, newH3, newUl, newLiTitle, newLiRating;
-	newLiRating = $('<li>').attr('id', 'movie'+newCount+'-rating').text(newRating);
+	newLiRating = $('<li>').addClass('rating').attr('id', 'movie'+newCount+'-rating').text(newRating);
 	newLiTitle = $('<li>').attr('id', 'movie'+newCount+'-title').text(newTitle);
 	newUl = $('<ul>').attr('id', 'movie'+newCount+'-list').append(newLiTitle, newLiRating);
 	newH3 = $('<h3>').attr('id', 'movie'+newCount+'-label').text('Movie '+newCount);
@@ -131,16 +131,19 @@ $('#new-movie-submit').on('click', function(e){
 	//Check if there are 3 or less items in this row
 	//if == 4 row is full! Create new row
 	//if row count.
-	var latestRowCount = $('#em-row'+rowCount).children;
+	var latestRowCount = $('#em-row'+rowCount).children('td').length;
 
 	console.log(latestRowCount);
 
-	if(/* latestRowCount.length */0 <= 3){//add to current row
+	var numLatestRowCount = parseFloat(latestRowCount);
+
+	if(numLatestRowCount <= 3){//add to current row
 		$('#em-row'+rowCount).append(newMovieTd);
 	}else{//create new row and add all elements here
 		var rowNum = rowCount + 1;
 		var newRow = $('<tr>').addClass('table-row').attr('id', 'em-row'+rowNum);
 		newRow.append(newMovieTd);
+		$('#existing-movies-tbody').append(newRow);
 
 	}
 
