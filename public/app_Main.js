@@ -34,8 +34,8 @@ $('#new-movie-submit').on('click', function(e){
 	$('#new-movie-form')[0].reset();
 
 	//Create new elements with id's/classes
-	var newMovieTd = $('<td>').attr('id', 'movie'+newCount+'-td');
-	var newDiv, newH3, newUl, newLiTitle, newLiRating;
+	var newMovieTd, newDiv, newH3, newUl, newLiTitle, newLiRating;
+	newMovieTd = $('<td>').attr('id', 'movie'+newCount+'-td');
 	newLiRating = $('<li>').addClass('rating').attr('id', 'movie'+newCount+'-rating').text(newRating);
 	newLiTitle = $('<li>').attr('id', 'movie'+newCount+'-title').text(newTitle);
 	newUl = $('<ul>').attr('id', 'movie'+newCount+'-list').append(newLiTitle, newLiRating);
@@ -68,6 +68,8 @@ $('#new-movie-submit').on('click', function(e){
 //Ajax practice to get data from JSON file
 var xhr = new XMLHttpRequest();
 
+xhr.open('GET', '/getMovies', true);
+
 xhr.onload = function() {
 	if (xhr.status === 200) {
 		responseObject = JSON.parse(xhr.response);
@@ -75,5 +77,4 @@ xhr.onload = function() {
 	}
 }
 
-xhr.open('GET', '/getMovies', true);
 xhr.send(null);
