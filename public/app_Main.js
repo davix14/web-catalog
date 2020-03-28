@@ -10,8 +10,6 @@ function formatRating() {
 		rating[i].innerHTML = value + '/5';
 		//debug only -> console.log(rating[i]);
 	}
-	// xhr.open('GET', '/load', true);
-	// xhr.send(null);
 }
 
 //Added event listener on submit button to take form input and
