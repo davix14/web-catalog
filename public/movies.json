@@ -2,7 +2,15 @@
     "movie": [
         {
             "title": "Drive",
-            "rating": "4"
+            "rating": 5
+        },
+        {
+            "title": "Greek",
+            "rating": 3
+        },
+        {
+            "title": "Brook",
+            "rating": 2
         }
     ]
 }

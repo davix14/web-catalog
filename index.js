@@ -1,17 +1,18 @@
 var express = require("express");//requre express
-var app = express ();//instantiate express
+var app = express();//instantiate express
 var bodyParser = require("body-parser");
-
+var fs = require('fs');
 //Enter server logic here
 app.use(express.static("public"));
 
 //Add logic to parse form input url encoded
-//app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/', function(req, res){
-	
-	res.sendFile('catalog.html');
+let rawdata = fs.readFileSync('public/movies.json');
+let movies = JSON.parse(rawdata);
 
+app.get('/load', function (req, res) {
+	console.log('Request received!');
+	res.json(movies);
 });
 
 //function to handle post request

@@ -1,15 +1,3 @@
-//Take input from form and add to 'Existing List'
-function changeColor() {
-	var list;
-	list = document.getElementById('movie1-rating');
-	list.className = 'good';
-
-}
-
-var link;
-link = document.getElementById('movie1-rating');
-link.addEventListener('click', changeColor, false);
-
 //Add event to page load for formatting of rating
 window.addEventListener('load', formatRating, false);
 
@@ -22,6 +10,8 @@ function formatRating() {
 		rating[i].innerHTML = value + '/5';
 		//debug only -> console.log(rating[i]);
 	}
+	// xhr.open('GET', '/load', true);
+	// xhr.send(null);
 }
 
 //Added event listener on submit button to take form input and
@@ -77,4 +67,15 @@ $('#new-movie-submit').on('click', function(e){
 	formatRating();
 });
 
-//Create
+//Ajax practice to get data from JSON file
+var xhr = new XMLHttpRequest();
+
+xhr.onload = function() {
+	if (xhr.status === 200) {
+		responseObject = JSON.parse(xhr.response);
+		console.log(responseObject);
+	}
+}
+
+xhr.open('GET', '/load', true);
+xhr.send(null);
