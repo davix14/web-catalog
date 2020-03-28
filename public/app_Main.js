@@ -77,5 +77,5 @@ xhr.onload = function() {
 	}
 }
 
-xhr.open('GET', '/load', true);
+xhr.open('GET', '/getMovies', true);
 xhr.send(null);
