@@ -1,3 +1,5 @@
+const maxPerRow = 4;
+
 //Add event to page load for formatting of rating
 window.addEventListener('load', formatRating, false);
 
@@ -14,56 +16,54 @@ function formatRating() {
 
 //Added event listener on submit button to take form input and
 //add new td and/or row to table of existing movies
-$('#new-movie-submit').on('click', function(e){
-	e.preventDefault();//Prevents submit
+$('#new-movie-submit').on('click', function (e) {
+    e.preventDefault();//Prevent form from doing POST
+	addToTable(newMovieElements(newRating(), newTitle(), newMovieCount()), rowCount(), maxPerRow);//Add data to the table
+	$('#new-movie-form')[0].reset();//reset form
+    formatRating();//formats rating value to correct form
+});
 
-	//Get values from form and count of existing movies for row logic
-	var newTitle = $('#new-movie-title').val();
-	var newRating = $('#new-movie-rating').val();
-	var existingMovieCount = $('.existing-movie-container').length;
-	var newCount = existingMovieCount + 1; // No of current movie entry
-	var rowCount = $('.table-row').length;
+newTitle = () => $('#new-movie-title').val();
 
-	//For debugging
-	// console.log(newTitle);
-	// console.log(newRating);
-	// console.log(existingMovieCount);
-	// console.log(rowCount);
+newRating = () => $('#new-movie-rating').val();
 
-	//Reset all form elements
-	$('#new-movie-form')[0].reset();
+rowCount = () => $('.table-row').length;
 
-	//Create new elements with id's/classes
-	var newMovieTd, newDiv, newH3, newUl, newLiTitle, newLiRating;
-	newMovieTd = $('<td>').attr('id', 'movie'+newCount+'-td');
-	newLiRating = $('<li>').addClass('rating').attr('id', 'movie'+newCount+'-rating').text(newRating);
-	newLiTitle = $('<li>').attr('id', 'movie'+newCount+'-title').text(newTitle);
-	newUl = $('<ul>').attr('id', 'movie'+newCount+'-list').append(newLiTitle, newLiRating);
-	newH3 = $('<h3>').attr('id', 'movie'+newCount+'-label').text('Movie '+newCount);
-	newDiv = $('<div>').addClass('existing-movie-container').attr('id', 'existing-movie'+newCount).append(newH3, newUl);
-	newMovieTd.append(newDiv);
+newMovieCount = () => ($('.existing-movie-container').length + 1);
 
-	//Check if there are 3 or less items in this row
-	//if == 4 row is full! Create new row
-	//if row count.
-	var latestRowCount = $('#em-row'+rowCount).children('td').length;
+//Function to create new elements with new count/info
+newMovieElements = function (newRating, newTitle, newCount){
+    //Declare new vars for elements
+    var newMovieTd, newDiv, newH3, newUl, newLiTitle, newLiRating;
+    //Fill vars with new elements with attributes
+	newLiRating = $('<li>').addClass('rating').attr('id', 'movie'+newCount+'-rating').text(newRating);//New li
+	newLiTitle = $('<li>').attr('id', 'movie'+newCount+'-title').text(newTitle);//New li
+	newUl = $('<ul>').attr('id', 'movie'+newCount+'-list').append(newLiTitle, newLiRating);//new ul and added li x2
+	newH3 = $('<h3>').attr('id', 'movie'+newCount+'-label').text('Movie '+newCount);//New h3 label
+    newDiv = $('<div>').addClass('existing-movie-container').attr('id', 'existing-movie'+newCount).append(newH3, newUl);//New div for title and ul
+    newMovieTd = $('<td>').attr('id', 'movie'+newCount+'-td').append(newDiv);//New td for all new movie tags
+    
+    return newMovieTd;
+};
+
+//Function to check table for items per row and add new row/td
+addToTable = function (newMovieTd, rowCount, maxPerRow){
+    //Check if existing row has >4 entries before adding or making new row
+    var latestRowCount = $('#em-row'+rowCount).children('td').length;
 
 	console.log(latestRowCount);
 
-	var numLatestRowCount = parseFloat(latestRowCount);
+	const numLatestRowCount = parseFloat(latestRowCount); //make rowcount into a number type
 
-	if(numLatestRowCount <= 3){//add to current row
-		$('#em-row'+rowCount).append(newMovieTd);
+	if(numLatestRowCount < maxPerRow){//add to current row
+		$('#em-row'+rowCount).append(newMovieTd);//add all new to current row
 	}else{//create new row and add all elements here
-		var rowNum = rowCount + 1;
-		var newRow = $('<tr>').addClass('table-row').attr('id', 'em-row'+rowNum);
-		newRow.append(newMovieTd);
-		$('#existing-movies-tbody').append(newRow);
+		const rowNum = rowCount + 1;//Number of next row
+		const newRow = $('<tr>').addClass('table-row').attr('id', 'em-row'+rowNum).append(newMovieTd);//Create new row and add td to it
+		$('#existing-movies-tbody').append(newRow);//Add new row and all new elements to table
 
 	}
-
-	formatRating();
-});
+};
 
 //Ajax practice to get data from JSON file
 var xhr = new XMLHttpRequest();
