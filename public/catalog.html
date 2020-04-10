@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <!--
-	Form will not post to the server but will instead be used to add items to the U.i.
+	Form will not post to the server but will instead 
+	be used to add items to the U.i. then post new values
+	to the server to be appended to json of existing movies
 	-->
 <HTML>
 
@@ -17,15 +19,8 @@
 		<table id='existing-movies-grid'>
 			<tbody id='existing-movies-tbody'>
 				<tr class='table-row' id='em-row1'>
-					<!-- <td id='movie1-td'> NO LONGER NEEDED BECAUSE DATA COMES FROM JSON FILE
-						<div class='existing-movie-container' id='existing-movie1'>
-							<h3 id='movie1-label'>Movie 1</h3>
-							<ul id='movie1-list'>
-								<li class='good' id='movie1-title'>Silence of the Lambs</li>
-								<li class='rating' id='movie1-rating'>1</li>
-							</ul>
-						</div>
-					</td> -->
+					<!-- Table Data comes from json file
+						which is populated on load -->
 				</tr>
 			</tbody>
 		</table>
