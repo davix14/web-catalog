@@ -6,7 +6,15 @@ const maxPerRow = 4;
 // console.log(obj);
 
 //Add event to page load for formatting of rating
-window.addEventListener('load', formatRating, false);
+window.addEventListener('load', function(){
+    formatRating();
+    $.getJSON('/getMovies')
+    .done(function(data){
+        for(let i = 0;i <data.movies.length;i++){
+            addToTable(newMovieElements(data.movies[i].rating, data.movies[i].title, newMovieCount()), rowCount(), maxPerRow); //Add data to the table
+        }
+    })
+}, false);
 
 function formatRating() {
     //log events
@@ -104,10 +112,14 @@ sendMovies = function(newTitle, newRating) {
 
 // xhr.send(null);
 
-//Repeat above http request in jquery
-$.getJSON('/getMovies')
-    .done(function(data) {
-        //var jsn = JSON.parse(data);
-        console.log('got JSON!');
-        console.log(data);
-    });
+//Repeat above http request in jquery SUCCESS
+// $.getJSON('/getMovies')
+//     .done(function(data) {
+//         //var jsn = JSON.parse(data);
+//         console.log('got JSON!');
+//         console.log(data);
+//         console.log(data.movies[1].title);
+//         for(let i =0;i<data.movies.length;i++){
+//             console.log(data.movies[i].title);
+//         }
+//     });

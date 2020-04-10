@@ -4,17 +4,16 @@ var app = express(); //instantiate express
 var fs = require('fs');
 
 //Enter server logic here
-// app.use(express.json());
 app.use(express.static("public"), express.json());
-
-//Added logic to respond to GET request with JSON info
-let rawdata = fs.readFileSync('public/movies.json');
-let movies = JSON.parse(rawdata);
-
 
 app.get('/getMovies', function(req, res) {
     console.log('Request received!');
+    //Added logic to respond to GET request to get latest JSON file info
+    let rawdata = fs.readFileSync('public/movies.json');
+    let movies = JSON.parse(rawdata);
+    console.log('File read and parsed');
     res.json(movies);
+    console.log('Response Sent');
 });
 
 //function to handle post request
@@ -26,7 +25,7 @@ app.post('/sendMovies', function(req, res) {
     console.log("Movie received:" + title + " Rating received:" + rating);
     // res.sendStatus(200);
     res.set('Content-Type', 'application/JSON');
-    res.send(JSON.stringify({ saved: true }));
+    res.status(200).send(JSON.stringify({ saved: true }));
 
 });
 
