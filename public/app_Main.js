@@ -101,28 +101,3 @@ sendMovies = function (newTitle, newRating) {
     };
     xtp.send(data);
 }
-    //Ajax practice to get data from JSON file
-    // var xhr = new XMLHttpRequest();
-
-// xhr.open('GET', '/getMovies', true);
-// xhr.setRequestHeader('Content-Type', 'application/json');
-// xhr.onload = function() {
-//     if (xhr.status === 200) {
-//         responseObject = JSON.parse(xhr.response);
-//         console.log(responseObject);
-//     }
-// };
-
-// xhr.send(null);
-
-//Repeat above http request in jquery SUCCESS
-// $.getJSON('/getMovies')
-//     .done(function(data) {
-//         //var jsn = JSON.parse(data);
-//         console.log('got JSON!');
-//         console.log(data);
-//         console.log(data.movies[1].title);
-//         for(let i =0;i<data.movies.length;i++){
-//             console.log(data.movies[i].title);
-//         }
-//     });
