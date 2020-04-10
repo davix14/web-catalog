@@ -108,5 +108,6 @@ sendMovies = function(newTitle, newRating) {
 $.getJSON('/getMovies')
     .done(function(data) {
         //var jsn = JSON.parse(data);
+        console.log('got JSON!');
         console.log(data);
     });
