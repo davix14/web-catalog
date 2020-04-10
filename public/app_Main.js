@@ -6,16 +6,16 @@ const maxPerRow = 4;
 // console.log(obj);
 
 //Add event to page load for formatting of rating
-window.addEventListener('load', function(){
-    formatRating();
-    $.getJSON('/getMovies')
-    .done(function(data){
-        for(let i = 0;i <data.movies.length;i++){
-            addToTable(newMovieElements(data.movies[i].rating, data.movies[i].title, newMovieCount()), rowCount(), maxPerRow); //Add data to the table
-        }
-    }).fail( function(){
-        console.log('Error loading saved movies');
-    });
+window.addEventListener('load', function () {
+    $.getJSON('/getMovies')//Get existing movies from server
+        .done(function (data) {//if successful
+            for (let i = 0; i < data.movies.length; i++) {//Iterate through the json received and add to the table in the page
+                addToTable(newMovieElements(data.movies[i].rating, data.movies[i].title, newMovieCount()), rowCount(), maxPerRow); //Add data to the table
+            }
+        }).fail(function () {//if failed
+            console.log('Error loading saved movies');//log error
+        });
+    formatRating();//Format the ratings
 }, false);
 
 function formatRating() {
@@ -31,7 +31,7 @@ function formatRating() {
 
 //Added event listener on submit button to take form input and
 //add new td and/or row to table of existing movies
-$('#new-movie-submit').on('click', function(e) {
+$('#new-movie-submit').on('click', function (e) {
     e.preventDefault(); //Prevent form from doing POST
     sendMovies(newTitle(), newRating()); //Send new values to server
     addToTable(newMovieElements(newRating(), newTitle(), newMovieCount()), rowCount(), maxPerRow); //Add data to the table
@@ -50,7 +50,7 @@ rowCount = () => $('.table-row').length;
 newMovieCount = () => ($('.existing-movie-container').length + 1);
 
 //Function to create new elements with new count/info
-newMovieElements = function(newRating, newTitle, newCount) {
+newMovieElements = function (newRating, newTitle, newCount) {
     //Declare new vars for elements
     var newMovieTd, newDiv, newH3, newUl, newLiTitle, newLiRating;
     //Fill vars with new elements with attributes
@@ -65,7 +65,7 @@ newMovieElements = function(newRating, newTitle, newCount) {
 };
 
 //Function to check table for items per row and add new row/td
-addToTable = function(newMovieTd, rowCount, maxPerRow) {
+addToTable = function (newMovieTd, rowCount, maxPerRow) {
     //Check if existing row has >4 entries before adding or making new row
     var latestRowCount = $('#em-row' + rowCount).children('td').length;
 
@@ -84,22 +84,22 @@ addToTable = function(newMovieTd, rowCount, maxPerRow) {
 };
 
 //AJAX to post new data
-sendMovies = function(newTitle, newRating) {
-        console.log('sendMovies called');
-        var data = "{\"title\":\"" + newTitle + "\",\"rating\":" + newRating + "}"; //Add form data to json string
-        // var obj = JSON.parse(data);//JSON string turned into JSON object
-        console.log(data);
+sendMovies = function (newTitle, newRating) {
+    console.log('sendMovies called');
+    var data = "{\"title\":\"" + newTitle + "\",\"rating\":" + newRating + "}"; //Add form data to json string
+    // var obj = JSON.parse(data);//JSON string turned into JSON object
+    console.log(data);
 
-        var xtp = new XMLHttpRequest();
-        xtp.open('POST', '/sendMovies', true);
-        xtp.setRequestHeader('Content-Type', 'application/json');
-        xtp.load = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log('SUCCESS!!');
-            };
+    var xtp = new XMLHttpRequest();
+    xtp.open('POST', '/sendMovies', true);
+    xtp.setRequestHeader('Content-Type', 'application/json');
+    xtp.load = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log('SUCCESS!!');
         };
-        xtp.send(data);
-    }
+    };
+    xtp.send(data);
+}
     //Ajax practice to get data from JSON file
     // var xhr = new XMLHttpRequest();
 
