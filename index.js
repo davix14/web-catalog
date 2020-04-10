@@ -43,10 +43,11 @@ app.post('/sendMovies', function (req, res) {//if post received
         //Respond with set type, status, and json
         res.set('Content-Type', 'application/JSON');
         res.status(200).send(JSON.stringify({ saved: true }));
-        console.log('Response successful!');
+        console.log('Post response successful!');
     }
     catch (err) {
         console.log('Error saving movies');
+        console.log(err);
         //Respond with set type, status, and json
         res.set('Content-Type', 'application/JSON');
         res.status(500).send(JSON.stringify({ saved: false }));

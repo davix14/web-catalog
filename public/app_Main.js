@@ -14,7 +14,7 @@ window.addEventListener('load', function () {
             }
             formatRating();//Format the ratings
         }).fail(function () {//if failed
-            console.log('Error loading saved movies');//log error
+            console.log('Error loading saved movies! See server log for more info');//log error
         });
         // formatRating();//Format the ratings
 }, false);
