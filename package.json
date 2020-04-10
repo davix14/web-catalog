@@ -9,7 +9,7 @@
   "description": "practicing a backend for website",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -R spec /tests/test.js"
+    "test": "mocha -R spec test.js"
   },
   "author": "Divrex",
   "license": "ISC",

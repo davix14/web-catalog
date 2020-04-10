@@ -3,7 +3,7 @@ require = require('really-need');
 describe('loading express', function () {
   var server;
   beforeEach(function () {
-    server = require('/index', { bustCache: true });
+    server = require('./*index', { bustCache: true });
   });
   afterEach(function (done) {
     server.close(done);
