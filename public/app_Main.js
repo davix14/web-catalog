@@ -12,15 +12,16 @@ window.addEventListener('load', function () {
             for (let i = 0; i < data.movies.length; i++) {//Iterate through the json received and add to the table in the page
                 addToTable(newMovieElements(data.movies[i].rating, data.movies[i].title, newMovieCount()), rowCount(), maxPerRow); //Add data to the table
             }
+            formatRating();//Format the ratings
         }).fail(function () {//if failed
             console.log('Error loading saved movies');//log error
         });
-    formatRating();//Format the ratings
+        // formatRating();//Format the ratings
 }, false);
 
 function formatRating() {
     //log events
-    //console.log('Page loaded! formatRating running');
+    console.log('formatRating running');
     var rating = document.getElementsByClassName('rating');
     for (var i = 0; i < rating.length; i++) {
         var value = parseFloat(rating[i].innerHTML);
