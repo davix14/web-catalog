@@ -1,6 +1,10 @@
 {
     "movies": [
         {
+            "title": "Silence of the Lambs",
+            "rating": 5
+        },
+        {
             "title": "Drive",
             "rating": 5
         },

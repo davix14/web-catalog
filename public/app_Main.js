@@ -13,7 +13,9 @@ window.addEventListener('load', function(){
         for(let i = 0;i <data.movies.length;i++){
             addToTable(newMovieElements(data.movies[i].rating, data.movies[i].title, newMovieCount()), rowCount(), maxPerRow); //Add data to the table
         }
-    })
+    }).fail( function(){
+        console.log('Error loading saved movies');
+    });
 }, false);
 
 function formatRating() {
