@@ -1,4 +1,3 @@
-var modernizr = require('modernizr');
 const maxPerRow = 4;
 
 //Add event to page load for formatting of rating
@@ -13,6 +12,7 @@ window.addEventListener('load', function () {
             console.log('Error loading saved movies! See server log for more info');//log error
         });
     // formatRating();//Format the ratings
+    addGeoLocation();
 }, false);
 
 function formatRating() {
@@ -116,7 +116,14 @@ function addGeoLocation() {
 
     if (modernizr.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            
+            var crd = position.coords;
+            lat = crd.latitude;
+            long = crd.longitude;
+            latTitle = $('<h3>').attr('id', 'latTitle').innerHTML(lat);
+            longTitle = $('<h3>').attr('id', 'longTitle').innerHTML(long);
+            newDivTitle = $('<div>').attr('id', 'geolocation-section').append(latTitle, longTitle);
+            $('#page-content').append(newDivTitle);
+
         }, function () {
             console.log('User does not want to share location');
         });
