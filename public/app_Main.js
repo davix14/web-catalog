@@ -1,10 +1,5 @@
 const maxPerRow = 4;
 
-//Practice making json objects
-// var data = "{\"movie\":"+newTitle()+",\"rating\":"+newRating+"()}";
-// var obj = JSON.parse(data);
-// console.log(obj);
-
 //Add event to page load for formatting of rating
 window.addEventListener('load', function () {
     $.getJSON('/getMovies')//Get existing movies from server
@@ -87,12 +82,9 @@ addToTable = function (newMovieTd, rowCount, maxPerRow) {
 //AJAX to post new data
 function sendMovies(newTitle, newRating) {
     // console.log('sendMovies called');
-    // var data = "{\"title\":\"" + newTitle + "\",\"rating\":" + newRating + "}"; //Add form data to json string
-    // //var obj = JSON.parse(data);//JSON string turned into JSON object
     // console.log(data);
-    // var data = JSON.stringify("{\"title\":\"" + newTitle + "\",\"rating\":" + newRating + "}"); //Add form data to json string
-    var data = JSON.stringify({title: newTitle, rating: parseFloat(newRating)});
-    //Redoing using jQuery .ajax
+    var data = JSON.stringify({title: newTitle, rating: parseFloat(newRating)});//stringify POST body json payload
+    //POST request using jQuery .ajax
     $.ajax({
         type: 'POST',
         url: '/sendMovies',
@@ -115,25 +107,4 @@ function sendMovies(newTitle, newRating) {
             console.log(res);
         }
     });
-
-    //Redoing the post request w/ jQuery FAILED Empty POST body
-    // $.post('/sendMovies', data, null, 'json')
-    // .done(function(res){
-    //     console.log('Successfully Posted!');
-    //     console.log(res);
-
-    // }).fail(function(res){
-    //     console.log('Failed to Post');
-    //     console.log(res);
-    // });
-
-    // var xtp = new XMLHttpRequest();
-    // xtp.open('POST', '/sendMovies', true);
-    // xtp.setRequestHeader('Content-Type', 'application/json');
-    // xtp.load = function () {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         console.log('SUCCESS!!');
-    //     };
-    // };
-    // xtp.send(data);
 }
