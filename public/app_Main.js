@@ -114,15 +114,16 @@ function addGeoLocation() {
     var newDiv, newDivTitle, latTitle, longTitle, lat, long;
     newDiv = $('<div>').addClass('geolocation-div').attr('id', 'geolocation-div');//TODO Append all others
 
-    if (modernizr.geolocation) {
+    if (Modernizr.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             var crd = position.coords;
             lat = crd.latitude;
             long = crd.longitude;
-            latTitle = $('<h3>').attr('id', 'latTitle').innerHTML(lat);
-            longTitle = $('<h3>').attr('id', 'longTitle').innerHTML(long);
-            newDivTitle = $('<div>').attr('id', 'geolocation-section').append(latTitle, longTitle);
-            $('#page-content').append(newDivTitle);
+            latTitle = $('<h3>').attr('id', 'latTitle').append('Latitude: '+lat);
+            longTitle = $('<h3>').attr('id', 'longTitle').append('Longitude: '+long);
+            newDivTitle = $('<h2>').attr('id', 'geolocation-title').append('Geolocation');
+            newDiv.append(newDivTitle, latTitle, longTitle);
+            $('#page-content').append(newDiv);
 
         }, function () {
             console.log('User does not want to share location');
