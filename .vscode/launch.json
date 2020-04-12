@@ -21,12 +21,5 @@
             ],
             "program": "${workspaceFolder}/index.js"
         }
-        // {
-        //     "type": "firefox",
-        //     "request": "launch",
-        //     "name": "Catalog WebPage",
-        //     "url": "http://localhost:3010/catalog.html",
-        //     "webRoot": "${workspaceFolder}"
-        // }
     ]
 }
