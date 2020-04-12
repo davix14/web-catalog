@@ -1,3 +1,4 @@
+var modernizr = require('modernizr');
 const maxPerRow = 4;
 
 //Add event to page load for formatting of rating
@@ -83,7 +84,7 @@ addToTable = function (newMovieTd, rowCount, maxPerRow) {
 function sendMovies(newTitle, newRating) {
     // console.log('sendMovies called');
     // console.log(data);
-    var data = JSON.stringify({title: newTitle, rating: parseFloat(newRating)});//stringify POST body json payload
+    var data = JSON.stringify({ title: newTitle, rating: parseFloat(newRating) });//stringify POST body json payload
     //POST request using jQuery .ajax
     $.ajax({
         type: 'POST',
@@ -107,4 +108,19 @@ function sendMovies(newTitle, newRating) {
             console.log(res);
         }
     });
-}
+};
+
+function addGeoLocation() {
+    var newDiv, newDivTitle, latTitle, longTitle, lat, long;
+    newDiv = $('<div>').addClass('geolocation-div').attr('id', 'geolocation-div');//TODO Append all others
+
+    if (modernizr.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            
+        }, function () {
+            console.log('User does not want to share location');
+        });
+    } else {
+        console.log('Browser does not support Geolocation');
+    }
+};

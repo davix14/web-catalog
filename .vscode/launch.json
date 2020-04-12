@@ -10,7 +10,13 @@
             "reAttach": true,
             "name": "Firefox localhost",
             "url": "http://localhost:3010/catalog.html",
-            "webRoot": "${workspaceFolder}/public"
+            "webRoot": "${workspaceFolder}/public",
+            "pathMappings": [
+                {
+                    "url": "http://localhost:3010",
+                    "path": "${workspaceFolder}/public"
+                }
+            ]
         },
         {
             "type": "node",
