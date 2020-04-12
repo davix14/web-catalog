@@ -19,7 +19,10 @@ app.get('/getMovies', function (req, res) {
 //Writing post for new movies to be added is appended
 app.post('/sendMovies', function (req, res) {//if post received
     console.log('post received');//Log receipt to console
+    console.log(req.body);
     try {
+
+        // let data = JSON.parse(req);
         //Get new title and rating
         var title = req.body.title;
         var rating = req.body.rating;
@@ -32,18 +35,19 @@ app.post('/sendMovies', function (req, res) {//if post received
         let movies = JSON.parse(rawdata);//parse to json
         console.log('File read and parsed');//log completion
 
-        let newVals = {"title":title,"rating":rating};
+        let newVals = { "title": title, "rating": rating };
         // movies.movies.push('\"title\": \"' + title +'\",\"rating\": ' + rating);
         movies.movies.push(newVals);
         console.log('Pushed new vals to existing json object');
-        
-        fs.writeFile("public/movies.json", JSON.stringify(movies));
+
+        fs.writeFile("public/movies.json", JSON.stringify(movies), (error) => {if (error) throw err;});
         console.log('File overwritten');
 
         //Respond with set type, status, and json
         res.set('Content-Type', 'application/JSON');
         res.status(200).send(JSON.stringify({ saved: true }));
         console.log('Post response successful!');
+
     }
     catch (err) {
         console.log('Error saving movies');

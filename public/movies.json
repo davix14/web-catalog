@@ -9,24 +9,16 @@
             "rating": 5
         },
         {
-            "title": "Greek",
+            "title": "Grease",
             "rating": 3
         },
         {
-            "title": "Brook",
+            "title": "Spiderman",
             "rating": 2
         },
         {
-            "title": "ser",
-            "rating": 4
-        },
-        {
-            "title": "ger",
-            "rating": 4
-        },
-        {
-            "title": "tree",
-            "rating": 4
+            "title": "tre",
+            "rating": 1
         }
     ]
 }
