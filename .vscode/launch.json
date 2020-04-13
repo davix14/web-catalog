@@ -5,27 +5,34 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "firefox",
+            "type": "chrome",
             "request": "launch",
-            "reAttach": true,
-            "name": "Firefox localhost",
+            "name": "Chrome Localhost",
             "url": "http://localhost:3010/catalog.html",
-            "webRoot": "${workspaceFolder}/public",
-            "pathMappings": [
-                {
-                    "url": "http://localhost:3010",
-                    "path": "${workspaceFolder}/public"
-                }
-            ]
+            "webRoot": "${workspaceFolder}"
         },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Server",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/index.js"
-        }
+        // {
+        //     "type": "firefox",
+        //     "request": "launch",
+        //     "reAttach": true,
+        //     "name": "Firefox localhost",
+        //     "url": "http://localhost:3010/catalog.html",
+        //     "webRoot": "${workspaceFolder}/public",
+        //     "pathMappings": [
+        //         {
+        //             "url": "http://localhost:3010",
+        //             "path": "${workspaceFolder}/public"
+        //         }
+        //     ]
+        // },
+        // {
+        //     "type": "node",
+        //     "request": "launch",
+        //     "name": "Server",
+        //     "skipFiles": [
+        //         "<node_internals>/**"
+        //     ],
+        //     "program": "${workspaceFolder}/index.js"
+        // }
     ]
 }
