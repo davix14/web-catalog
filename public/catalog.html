@@ -8,44 +8,58 @@
 
 <head>
 	<!-- Adding bootstrap here -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<!-- END bootstrap -->
 	<link href='catalog_Style.css' type='text/css' rel='stylesheet'>
 	<title>Movie Catalog</title>
 </head>
-<div id='title-bar'>
-	<h1 id='page-title'>Movie Catalog</h1>
-</div>
-<div id='page-content'>
-	<div id='existing-entries'>
-		<h2 id='existing-list-title'>Previously Watched Movies</h2>
-		<table id='existing-movies-grid'>
-			<tbody id='existing-movies-tbody'>
-				<tr class='table-row' id='em-row1'>
-					<!-- Table Data comes from json file
-						which is populated on load -->
-				</tr>
-			</tbody>
-		</table>
+<div class="container">
+	<div id='title-bar'>
+		<h1 id='page-title'>Movie Catalog</h1>
 	</div>
-	<div id='adding-movies'>
-		<h2 id='new-entry-title'>New Movie Entry</h2>
-		<form id='new-movie-form' method='post'>
-			<label for='movie-title'>Movie Title:</label><br>
-			<input type='text' name='new-movie-title' id='new-movie-title' required><br>
-			<label for='new-movie-rating'>Rating (1-5):</label><br>
-			<input type='text' name='new-movie-rating' id='new-movie-rating' required><br><br>
-			<input type='submit' name='new-movie-submit' id='new-movie-submit'>
-		</form>
+	<div id='page-content'>
+		<div id='existing-entries'>
+			<h2 id='existing-list-title'>Previously Watched Movies</h2>
+			<table class="table table-bordered" id='existing-movies-grid'>
+				<tbody id='existing-movies-tbody'>
+					<tr class='table-row' id='em-row1'>
+						<!-- Table Data comes from json file
+						which is populated on load -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id='adding-movies'>
+			<h2 id='new-entry-title'>New Movie Entry</h2>
+			<form id='new-movie-form' method='post'>
+				<div class="form-group">
+					<label for='movie-title'>Movie Title:</label><br>
+					<input type='text' name='new-movie-title' id='new-movie-title' required><br>
+				</div>
+				<div class="form-group">
+					<label for='new-movie-rating'>Rating (1-5):</label><br>
+					<input type='text' name='new-movie-rating' id='new-movie-rating' required><br><br>
+				</div>
+				<input type='submit' name='new-movie-submit' class="btn btn-primary" id='new-movie-submit'>
+			</form>
 
+		</div>
 	</div>
 </div>
 <!-- Adding Bootstrap here -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
 <!-- END bootstrap -->
 <script src="modernizr-custom.js"></script>
 <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
 <script src='app_Main.js'></script>
+
 </HTML>

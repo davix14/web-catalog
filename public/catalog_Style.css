@@ -1,9 +1,9 @@
-/* 
+/*
  KEY
  -----------
  ID = #
  Class = .
-*/
+
 html{
 	font: normal 20px/1.5 sans-serif;
 	width: 100%;
@@ -41,7 +41,7 @@ body{
 	padding: .5em 1em .5em 1em;
 	border: 1.5px solid grey;
 	border-radius: 10px;
-	/* display: inline-block; */
+	display: inline-block;
 	vertical-align: top;
 	width: 10em;
 	height: 11em;
@@ -53,4 +53,4 @@ body{
 
 .rating{
 	color: red;
-}
+} */
