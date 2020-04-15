@@ -111,24 +111,24 @@ function sendMovies(newTitle, newRating) {
 };
 
 function addGeoLocation() {
-    var newDiv, newDivTitle, latTitle, longTitle, lat, long;
-    newDiv = $('<div>').addClass('geolocation-div').attr('id', 'geolocation-div');//TODO Append all others
+    var newDiv, newDivTitle, latTitle, longTitle, lat, long;//Declare new variables
+    newDiv = $('<div>').addClass('geolocation-div').attr('id', 'geolocation-div');//create new divs with attr
 
-    if (Modernizr.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var crd = position.coords;
-            lat = crd.latitude;
-            long = crd.longitude;
-            latTitle = $('<h3>').attr('id', 'latTitle').append('Latitude: '+lat);
-            longTitle = $('<h3>').attr('id', 'longTitle').append('Longitude: '+long);
-            newDivTitle = $('<h2>').attr('id', 'geolocation-title').append('Geolocation');
-            newDiv.append(newDivTitle, latTitle, longTitle);
-            $('#page-content').append(newDiv);
+    if (Modernizr.geolocation) {//if browser supports geolocation
+        navigator.geolocation.getCurrentPosition(function (position) { //get current position success funct and fail funct
+            var crd = position.coords;//Get coords
+            lat = crd.latitude;//get latitude
+            long = crd.longitude;//get longitude
+            latTitle = $('<h3>').attr('id', 'latTitle').append('Latitude: '+lat);//create latitude html
+            longTitle = $('<h3>').attr('id', 'longTitle').append('Longitude: '+long);//create longitude html
+            newDivTitle = $('<h2>').attr('id', 'geolocation-title').append('Geolocation');//create title
+            newDiv.append(newDivTitle, latTitle, longTitle);//Append lat long and title to div
+            $('#page-content').append(newDiv);//add new div to the page
 
-        }, function () {
-            console.log('User does not want to share location');
+        }, function () {//Fail function
+            console.log('User does not want to share location');//log error
         });
     } else {
-        console.log('Browser does not support Geolocation');
+        console.log('Browser does not support Geolocation');//Browser does not support
     }
 };
