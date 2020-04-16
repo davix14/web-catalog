@@ -49,14 +49,20 @@ newMovieCount = () => ($('.existing-movie-container').length + 1);
 //Function to create new elements with new count/info
 newMovieElements = function (newRating, newTitle, newCount) {
     //Declare new vars for elements
-    var newMovieTd, newDiv, newH3, newUl, newLiTitle, newLiRating;
+    var newMovieTd, newDiv, newH3, newImg, newTitleText, newRatingText;//newUl, //newLiTitle, newLiRating;
     //Fill vars with new elements with attributes
-    newLiRating = $('<li>').addClass('rating').attr('id', 'movie' + newCount + '-rating').text(newRating); //New li
-    newLiTitle = $('<li>').attr('id', 'movie' + newCount + '-title').text(newTitle); //New li
-    newUl = $('<ul>').attr('id', 'movie' + newCount + '-list').append(newLiTitle, newLiRating); //new ul and added li x2
-    newH3 = $('<h3>').attr('id', 'movie' + newCount + '-label').text('Movie ' + newCount); //New h3 label
-    newDiv = $('<div>').addClass('existing-movie-container').attr('id', 'existing-movie' + newCount).append(newH3, newUl); //New div for title and ul
-    newMovieTd = $('<td>').attr('id', 'movie' + newCount + '-td').append(newDiv); //New td for all new movie tags
+
+    //Trying to add cards w/ bootstrap with generic image
+
+    // newLiRating = $('<li>').addClass('rating').attr('id', 'movie' + newCount + '-rating').text(newRating); //New li
+    // newLiTitle = $('<li>').attr('id', 'movie' + newCount + '-title').text(newTitle); //New li
+    // newUl = $('<ul>').attr('id', 'movie' + newCount + '-list').append(newLiTitle, newLiRating); //new ul and added li x2
+    newTitleText = $('<h5>').addClass('card-text').attr('id','movie'+newCount+'-title-text').append('Title: '+newTitle);
+    newRatingText = $('<h5>').addClass('card-text').attr('id', 'movie'+newCount+'-rating-text').append('Rating: '+newRating);
+    newH3 = $('<h3>').addClass('card-title').attr('id', 'movie' + newCount + '-label').text('Movie ' + newCount); //New h3 label
+    newImg = $('<img>').addClass('card-img-top').attr('id', 'movie'+newCount+'-card-img').attr('src', 'http://localhost:3010/img/cherry.jpg'). attr('alt', 'Card image cap');
+    newDiv = $('<div>').addClass('existing-movie-container card').attr('id', 'existing-movie' + newCount).append(newImg, newH3, newTitleText, newRatingText); //New div for title and ul
+    newMovieTd = $('<td>').addClass('m-0 p-0').attr('id', 'movie' + newCount + '-td').append(newDiv); //New td for all new movie tags
 
     return newMovieTd;
 };
