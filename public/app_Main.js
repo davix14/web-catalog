@@ -1,5 +1,7 @@
 const maxPerRow = 4;
 
+var added = false;//Flag for button showing
+
 //Add event to page load for formatting of rating
 window.addEventListener('load', function () {
     $.getJSON('/getMovies')//Get existing movies from server
@@ -13,6 +15,9 @@ window.addEventListener('load', function () {
         });
     // formatRating();//Format the ratings
     addGeoLocation();
+    //TODO add function that will add button to save
+
+    //Adding function which adds to sessison storage of movie count
 }, false);
 
 function formatRating() {
@@ -30,11 +35,15 @@ function formatRating() {
 //add new td and/or row to table of existing movies
 $('#new-movie-submit').on('click', function (e) {
     e.preventDefault(); //Prevent form from doing POST
-    sendMovies(newTitle(), newRating()); //Send new values to server
+    // sendMovies(newTitle(), newRating()); //DONT Send new values to server
+    
+    //Store in session first
+    storeInSession(newTitle(), newRating());
+
     addToTable(newMovieElements(newRating(), newTitle(), newMovieCount()), rowCount(), maxPerRow); //Add data to the table
     $('#new-movie-form')[0].reset(); //reset form
     formatRating(); //formats rating value to correct form
-
+    added = true;//Once a new movie is added show 'save' button
 });
 
 //Functions to get values from fields and metadata on the page
@@ -57,10 +66,10 @@ newMovieElements = function (newRating, newTitle, newCount) {
     // newLiRating = $('<li>').addClass('rating').attr('id', 'movie' + newCount + '-rating').text(newRating); //New li
     // newLiTitle = $('<li>').attr('id', 'movie' + newCount + '-title').text(newTitle); //New li
     // newUl = $('<ul>').attr('id', 'movie' + newCount + '-list').append(newLiTitle, newLiRating); //new ul and added li x2
-    newTitleText = $('<h5>').addClass('card-text').attr('id','movie'+newCount+'-title-text').append('Title: '+newTitle);
-    newRatingText = $('<h5>').addClass('card-text').attr('id', 'movie'+newCount+'-rating-text').append('Rating: '+newRating);
+    newTitleText = $('<h5>').addClass('card-text').attr('id', 'movie' + newCount + '-title-text').append('Title: ' + newTitle);
+    newRatingText = $('<h5>').addClass('card-text').attr('id', 'movie' + newCount + '-rating-text').append('Rating: ' + newRating);
     newH3 = $('<h3>').addClass('card-title').attr('id', 'movie' + newCount + '-label').text('Movie ' + newCount); //New h3 label
-    newImg = $('<img>').addClass('card-img-top').attr('id', 'movie'+newCount+'-card-img').attr('src', 'http://localhost:3010/img/cherry.jpg'). attr('alt', 'Card image cap');
+    newImg = $('<img>').addClass('card-img-top').attr('id', 'movie' + newCount + '-card-img').attr('src', 'http://localhost:3010/img/cherry.jpg').attr('alt', 'Card image cap');
     newDiv = $('<div>').addClass('existing-movie-container card').attr('id', 'existing-movie' + newCount).append(newImg, newH3, newTitleText, newRatingText); //New div for title and ul
     newMovieTd = $('<td>').addClass('m-0 p-0').attr('id', 'movie' + newCount + '-td').append(newDiv); //New td for all new movie tags
 
@@ -125,8 +134,8 @@ function addGeoLocation() {
             var crd = position.coords;//Get coords
             lat = crd.latitude;//get latitude
             long = crd.longitude;//get longitude
-            latTitle = $('<h3>').attr('id', 'latTitle').append('Latitude: '+lat);//create latitude html
-            longTitle = $('<h3>').attr('id', 'longTitle').append('Longitude: '+long);//create longitude html
+            latTitle = $('<h3>').attr('id', 'latTitle').append('Latitude: ' + lat);//create latitude html
+            longTitle = $('<h3>').attr('id', 'longTitle').append('Longitude: ' + long);//create longitude html
             newDivTitle = $('<h2>').attr('id', 'geolocation-title').append('Geolocation');//create title
             newDiv.append(newDivTitle, latTitle, longTitle);//Append lat long and title to div
             $('#page-content').append(newDiv);//add new div to the page
@@ -138,3 +147,35 @@ function addGeoLocation() {
         console.log('Browser does not support Geolocation');//Browser does not support
     }
 };
+
+//TODO new function for saving the new entries to the session in json string
+function storeInSession(newTitle, newRating) {
+    if (window.sessionStorage) {//if session storage is supported by the browser
+        console.log("Browser supports session stoage");
+        let obj = { title: newTitle, rating: parseFloat(newRating) };//Add data to json object
+        if (sessionStorage.getItem('sessionData')) {
+            console.log(sessionStorage.getItem('sessionData'));
+            //SessionData already exists
+            console.log('sessionData already exists');
+            //Get stored json string and parse to json
+            var stored = JSON.parse(sessionStorage.getItem('session-storage'));
+            console.log(stored);
+            stored.push(obj);//append new data to stored data
+            console.log('Old + New = \n' + obj);
+            sessionStorage.setItem('sessionData', JSON.stringify(stored));//Store in session
+        }else{
+            console.log('sessionData does not exist');
+            console.log(obj);
+            //SessionData does not exist so create new sessionData
+            sessionStorage.setItem('sessionData', JSON.stringify(obj));
+        }
+    } else {
+        console.log("Browser does not support session storage");
+    }
+};
+
+//TODO add :
+//-method to send all stored movies to server to store in file
+//-Add method for adding the button / make html visible
+//-Add method to clear session storage on reload
+//-Add edit button
