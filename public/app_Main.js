@@ -1,6 +1,6 @@
 const maxPerRow = 4;
 
-var added = false;//Flag for button showing
+var modded = false;//Flag for button showing
 
 //Add event to page load for formatting of rating
 window.addEventListener('load', function () {
@@ -9,41 +9,47 @@ window.addEventListener('load', function () {
             for (let i = 0; i < data.movies.length; i++) {//Iterate through the json received and add to the table in the page
                 addToTable(newMovieElements(data.movies[i].rating, data.movies[i].title, newMovieCount()), rowCount(), maxPerRow); //Add data to the table
             }
-            formatRating();//Format the ratings
+            // formatRating();//Format the ratings
         }).fail(function () {//if failed
-            console.log('Error loading saved movies! See server log for more info');//log error
-        });
+        console.log('Error loading saved movies! See server log for more info');//log error
+    }).then(r => addGeoLocation());
     // formatRating();//Format the ratings
-    addGeoLocation();
-    //TODO add function that will add button to save
-
+    // addGeoLocation();
     //Adding function which adds to sessison storage of movie count
 }, false);
 
 function formatRating() {
     //log events
     console.log('formatRating running');
-    var rating = document.getElementsByClassName('rating');
-    for (var i = 0; i < rating.length; i++) {
-        var value = parseFloat(rating[i].innerHTML);
+    let rating = document.getElementsByClassName('rating');
+    for (let i = 0; i < rating.length; i++) {
+        let value = parseFloat(rating[i].innerHTML);
         rating[i].innerHTML = value + '/5';
         //debug only -> console.log(rating[i]);
-    };
-};
+    }
+
+}
 
 //Added event listener on submit button to take form input and
 //add new td and/or row to table of existing movies
 $('#new-movie-submit').on('click', function (e) {
     e.preventDefault(); //Prevent form from doing POST
     // sendMovies(newTitle(), newRating()); //DONT Send new values to server
-    
+
     //Store in session first
     storeInSession(newTitle(), newRating());
 
     addToTable(newMovieElements(newRating(), newTitle(), newMovieCount()), rowCount(), maxPerRow); //Add data to the table
     $('#new-movie-form')[0].reset(); //reset form
     formatRating(); //formats rating value to correct form
-    added = true;//Once a new movie is added show 'save' button
+
+
+    //Change invisble to visble in html class
+    $('#saveBtn').toggleClass('invisible', false);//Remove invisible from class
+    $('#saveBtn').toggleClass('visible', true);//Add visible to class
+
+    if (modded != true)
+        modded = true;//Once a new movie is added show 'save' button
 });
 
 //Functions to get values from fields and metadata on the page
@@ -58,7 +64,7 @@ newMovieCount = () => ($('.existing-movie-container').length + 1);
 //Function to create new elements with new count/info
 newMovieElements = function (newRating, newTitle, newCount) {
     //Declare new vars for elements
-    var newMovieTd, newDiv, newH3, newImg, newTitleText, newRatingText;//newUl, //newLiTitle, newLiRating;
+    let newMovieTd, newDiv, newH3, newImg, newTitleText, newRatingText;//newUl, //newLiTitle, newLiRating;
     //Fill vars with new elements with attributes
 
     //Trying to add cards w/ bootstrap with generic image
@@ -79,7 +85,7 @@ newMovieElements = function (newRating, newTitle, newCount) {
 //Function to check table for items per row and add new row/td
 addToTable = function (newMovieTd, rowCount, maxPerRow) {
     //Check if existing row has >4 entries before adding or making new row
-    var latestRowCount = $('#em-row' + rowCount).children('td').length;
+    let latestRowCount = $('#em-row' + rowCount).children('td').length;
 
     console.log(latestRowCount);
 
@@ -99,7 +105,7 @@ addToTable = function (newMovieTd, rowCount, maxPerRow) {
 function sendMovies(newTitle, newRating) {
     // console.log('sendMovies called');
     // console.log(data);
-    var data = JSON.stringify({ title: newTitle, rating: parseFloat(newRating) });//stringify POST body json payload
+    let data = JSON.stringify({title: newTitle, rating: parseFloat(newRating)});//stringify POST body json payload
     //POST request using jQuery .ajax
     $.ajax({
         type: 'POST',
@@ -118,20 +124,20 @@ function sendMovies(newTitle, newRating) {
             console.log('Successfully Posted!');
             console.log(res);
         },
-        fail: function () {
+        fail: function (res) {
             console.log('Failed to Post');
             console.log(res);
         }
     });
-};
+}
 
 function addGeoLocation() {
-    var newDiv, newDivTitle, latTitle, longTitle, lat, long;//Declare new variables
+    let newDiv, newDivTitle, latTitle, longTitle, lat, long;//Declare new variables
     newDiv = $('<div>').addClass('geolocation-div').attr('id', 'geolocation-div');//create new divs with attr
 
     if (Modernizr.geolocation) {//if browser supports geolocation
         navigator.geolocation.getCurrentPosition(function (position) { //get current position success funct and fail funct
-            var crd = position.coords;//Get coords
+            let crd = position.coords;//Get coords
             lat = crd.latitude;//get latitude
             long = crd.longitude;//get longitude
             latTitle = $('<h3>').attr('id', 'latTitle').append('Latitude: ' + lat);//create latitude html
@@ -146,24 +152,24 @@ function addGeoLocation() {
     } else {
         console.log('Browser does not support Geolocation');//Browser does not support
     }
-};
+}
 
 //TODO new function for saving the new entries to the session in json string
 function storeInSession(newTitle, newRating) {
     if (window.sessionStorage) {//if session storage is supported by the browser
         console.log("Browser supports session stoage");
-        let obj = { title: newTitle, rating: parseFloat(newRating) };//Add data to json object
+        let obj = {title: newTitle, rating: parseFloat(newRating)};//Add data to json object
         if (sessionStorage.getItem('sessionData')) {
             console.log(sessionStorage.getItem('sessionData'));
             //SessionData already exists
             console.log('sessionData already exists');
             //Get stored json string and parse to json
-            var stored = JSON.parse(sessionStorage.getItem('session-storage'));
+            let stored = JSON.parse(sessionStorage.getItem('session-storage'));
             console.log(stored);
             stored.push(obj);//append new data to stored data
             console.log('Old + New = \n' + obj);
             sessionStorage.setItem('sessionData', JSON.stringify(stored));//Store in session
-        }else{
+        } else {
             console.log('sessionData does not exist');
             console.log(obj);
             //SessionData does not exist so create new sessionData
@@ -172,10 +178,9 @@ function storeInSession(newTitle, newRating) {
     } else {
         console.log("Browser does not support session storage");
     }
-};
+}
 
-//TODO add :
-//-method to send all stored movies to server to store in file
-//-Add method for adding the button / make html visible
-//-Add method to clear session storage on reload
-//-Add edit button
+
+//TODO add :-method to send all stored movies to server to store in file
+//TODO add :-Add method to clear session storage on reload
+//TODO add :-Add edit button
