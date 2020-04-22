@@ -49,14 +49,20 @@ newMovieCount = () => ($('.existing-movie-container').length + 1);
 //Function to create new elements with new count/info
 newMovieElements = function (newRating, newTitle, newCount) {
     //Declare new vars for elements
-    var newMovieTd, newDiv, newH3, newUl, newLiTitle, newLiRating;
+    var newMovieTd, newDiv, newH3, newImg, newTitleText, newRatingText;//newUl, //newLiTitle, newLiRating;
     //Fill vars with new elements with attributes
-    newLiRating = $('<li>').addClass('rating').attr('id', 'movie' + newCount + '-rating').text(newRating); //New li
-    newLiTitle = $('<li>').attr('id', 'movie' + newCount + '-title').text(newTitle); //New li
-    newUl = $('<ul>').attr('id', 'movie' + newCount + '-list').append(newLiTitle, newLiRating); //new ul and added li x2
-    newH3 = $('<h3>').attr('id', 'movie' + newCount + '-label').text('Movie ' + newCount); //New h3 label
-    newDiv = $('<div>').addClass('existing-movie-container').attr('id', 'existing-movie' + newCount).append(newH3, newUl); //New div for title and ul
-    newMovieTd = $('<td>').attr('id', 'movie' + newCount + '-td').append(newDiv); //New td for all new movie tags
+
+    //Trying to add cards w/ bootstrap with generic image
+
+    // newLiRating = $('<li>').addClass('rating').attr('id', 'movie' + newCount + '-rating').text(newRating); //New li
+    // newLiTitle = $('<li>').attr('id', 'movie' + newCount + '-title').text(newTitle); //New li
+    // newUl = $('<ul>').attr('id', 'movie' + newCount + '-list').append(newLiTitle, newLiRating); //new ul and added li x2
+    newTitleText = $('<h5>').addClass('card-text').attr('id','movie'+newCount+'-title-text').append('Title: '+newTitle);
+    newRatingText = $('<h5>').addClass('card-text').attr('id', 'movie'+newCount+'-rating-text').append('Rating: '+newRating);
+    newH3 = $('<h3>').addClass('card-title').attr('id', 'movie' + newCount + '-label').text('Movie ' + newCount); //New h3 label
+    newImg = $('<img>').addClass('card-img-top').attr('id', 'movie'+newCount+'-card-img').attr('src', 'http://localhost:3010/img/cherry.jpg'). attr('alt', 'Card image cap');
+    newDiv = $('<div>').addClass('existing-movie-container card').attr('id', 'existing-movie' + newCount).append(newImg, newH3, newTitleText, newRatingText); //New div for title and ul
+    newMovieTd = $('<td>').addClass('m-0 p-0').attr('id', 'movie' + newCount + '-td').append(newDiv); //New td for all new movie tags
 
     return newMovieTd;
 };
@@ -111,24 +117,24 @@ function sendMovies(newTitle, newRating) {
 };
 
 function addGeoLocation() {
-    var newDiv, newDivTitle, latTitle, longTitle, lat, long;
-    newDiv = $('<div>').addClass('geolocation-div').attr('id', 'geolocation-div');//TODO Append all others
+    var newDiv, newDivTitle, latTitle, longTitle, lat, long;//Declare new variables
+    newDiv = $('<div>').addClass('geolocation-div').attr('id', 'geolocation-div');//create new divs with attr
 
-    if (Modernizr.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var crd = position.coords;
-            lat = crd.latitude;
-            long = crd.longitude;
-            latTitle = $('<h3>').attr('id', 'latTitle').append('Latitude: '+lat);
-            longTitle = $('<h3>').attr('id', 'longTitle').append('Longitude: '+long);
-            newDivTitle = $('<h2>').attr('id', 'geolocation-title').append('Geolocation');
-            newDiv.append(newDivTitle, latTitle, longTitle);
-            $('#page-content').append(newDiv);
+    if (Modernizr.geolocation) {//if browser supports geolocation
+        navigator.geolocation.getCurrentPosition(function (position) { //get current position success funct and fail funct
+            var crd = position.coords;//Get coords
+            lat = crd.latitude;//get latitude
+            long = crd.longitude;//get longitude
+            latTitle = $('<h3>').attr('id', 'latTitle').append('Latitude: '+lat);//create latitude html
+            longTitle = $('<h3>').attr('id', 'longTitle').append('Longitude: '+long);//create longitude html
+            newDivTitle = $('<h2>').attr('id', 'geolocation-title').append('Geolocation');//create title
+            newDiv.append(newDivTitle, latTitle, longTitle);//Append lat long and title to div
+            $('#page-content').append(newDiv);//add new div to the page
 
-        }, function () {
-            console.log('User does not want to share location');
+        }, function () {//Fail function
+            console.log('User does not want to share location');//log error
         });
     } else {
-        console.log('Browser does not support Geolocation');
+        console.log('Browser does not support Geolocation');//Browser does not support
     }
 };
